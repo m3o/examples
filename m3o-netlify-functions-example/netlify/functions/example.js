@@ -1,9 +1,9 @@
-const { API_KEY } = process.env;
+const { M3O_API_KEY } = process.env;
 
 const m3o = require("@m3o/m3o-node");
 
 exports.handler = async function (event, context) {
-  if (!API_KEY) {
+  if (!M3O_API_KEY) {
     return {
       statusCode: 500,
       body: JSON.stringify({ error: "no api key" }),
@@ -13,10 +13,10 @@ exports.handler = async function (event, context) {
   let body = JSON.parse(event.body);
 
   try {
-    let response = await new m3o.Client({ token: API_KEY }).call(
-      // @todo change this to the actual endpoint you want to call
-      "file",
-      "List",
+    let response = await new m3o.Client({ token: M3O_API_KEY }).call(
+      // @todo change this to the actual API and endpoint you want to call
+      "helloworld", // the name of the API
+      "Call", // the name of the endpoint
       body
     );
     return {
